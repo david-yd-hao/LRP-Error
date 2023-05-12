@@ -8,6 +8,7 @@ from collections import defaultdict
 import numpy as np
 
 from . import mask as maskUtils
+import code
 
 
 class COCOeval:
@@ -361,6 +362,8 @@ class COCOeval:
         olrp_loc = -np.ones((K, A, M))
         olrp_fp = -np.ones((K, A, M))
         olrp_fn = -np.ones((K, A, M))
+        all_lrp_fn = -np.ones((K, A, M, 100))
+        all_lrp_fp = -np.ones((K, A, M, 100))
         olrp = -np.ones((K, A, M))
         lrp_opt_thr = -np.ones((K, A, M))
 
@@ -474,6 +477,8 @@ class COCOeval:
                                 (tp_num[opt_pos_idx] + fp_num[opt_pos_idx])
                             olrp_fn[k, a, m] = fn_num[opt_pos_idx] / npig
                             lrp_opt_thr[k, a, m] = dtScoresSorted[opt_pos_idx]
+                            print(lrps.shape, fp_num.shape, tp_num.shape)
+                            code.interact(local=locals())
                         # There is No TP
                         else:
                             olrp_loc[k, a, m] = np.nan
